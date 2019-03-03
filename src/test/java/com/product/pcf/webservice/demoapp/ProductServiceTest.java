@@ -68,7 +68,7 @@ public class ProductServiceTest {
     }
 
     @Test
-    public void findProductById_shouldReturnProductNotFoundException_whenProductIdIsNotFound() throws ProductNotFoundException {
+    public void findProductById_shouldReturnProductNotFoundException_whenProductIdIsNotFound() throws ProductNotFoundException, ProductAlreadyExistsException {
 
         //Given
         Product newProduct = createProduct(5L,"Tenis Olympicus","Tenis Branco",560.00);
@@ -77,11 +77,25 @@ public class ProductServiceTest {
         when(productRepository.findById(eq(10L))).thenReturn(Optional.of(newProduct));
         thrown.expect(ProductNotFoundException.class);
 
-        Product productSearched = productService.findProductById(5L);
+        productService.findProductById(5L);
+    }
+
+
+    @Test
+    public void findProductById_shouldReturnProduct_whenProductIdIsFound() throws ProductNotFoundException, ProductAlreadyExistsException {
+
+        //Given
+        Product newProduct = createProduct(null,"Tenis Olympicus","Tenis Branco",560.00);
+
+        //When
+        when(productRepository.findById(eq(null))).thenReturn(Optional.of(newProduct));
+
+        Product productSearched = productService.createProduct(newProduct);
 
         //Then
         assertThat(productSearched, is(nullValue()));
     }
+
 
     @Test
     public void findProductById_shouldReturnProduct_whenProductWasFound() throws ProductNotFoundException {
