@@ -2,6 +2,7 @@ package com.product.pcf.webservice.service.impl;
 
 import com.product.pcf.webservice.constants.ProductConstants;
 import com.product.pcf.webservice.entity.Product;
+import com.product.pcf.webservice.exception.ProductAlreadyExistsException;
 import com.product.pcf.webservice.exception.ProductNotFoundException;
 import com.product.pcf.webservice.repository.ProductRepository;
 import com.product.pcf.webservice.service.IProductService;
@@ -34,13 +35,13 @@ public class ProductServiceImpl implements IProductService {
     }
 
     @Override
-    public Product createProduct(Product product) throws ProductNotFoundException {
+    public Product createProduct(Product product) throws ProductAlreadyExistsException, ProductNotFoundException {
         Product existingProduct = this.findProductById(product.getId());
 
         if(existingProduct.getId() == null){
             return this.productRepository.save(product);
         }else{
-            throw new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE);
+            throw new ProductAlreadyExistsException(ProductConstants.PRODUCT_ALREADY_EXISTS_ERROR_MESSAGE);
         }
     }
 

@@ -2,6 +2,7 @@ package com.product.pcf.webservice.controller;
 
 
 import com.product.pcf.webservice.entity.Product;
+import com.product.pcf.webservice.exception.ProductAlreadyExistsException;
 import com.product.pcf.webservice.exception.ProductNotFoundException;
 import com.product.pcf.webservice.service.IProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -54,7 +55,7 @@ public class DemoAppController {
         try {
             createdProduct = productService.createProduct(product);
             return new ResponseEntity<> (createdProduct,HttpStatus.OK);
-        } catch (ProductNotFoundException e) {
+        } catch (ProductNotFoundException  | ProductAlreadyExistsException e) {
             return new ResponseEntity<> (HttpStatus.BAD_REQUEST);
         }
 

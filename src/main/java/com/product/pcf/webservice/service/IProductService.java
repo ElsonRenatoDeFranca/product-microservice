@@ -1,6 +1,7 @@
 package com.product.pcf.webservice.service;
 
 import com.product.pcf.webservice.entity.Product;
+import com.product.pcf.webservice.exception.ProductAlreadyExistsException;
 import com.product.pcf.webservice.exception.ProductNotFoundException;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public interface IProductService {
      * @param product
      * @return
      */
-    Product createProduct(Product product)  throws ProductNotFoundException;
+    Product createProduct(Product product)  throws ProductAlreadyExistsException, ProductNotFoundException;
 
     /**
      *

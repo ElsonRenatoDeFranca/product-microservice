@@ -1,6 +1,7 @@
 package com.product.pcf.webservice.demoapp;
 
 import com.product.pcf.webservice.entity.Product;
+import com.product.pcf.webservice.exception.ProductAlreadyExistsException;
 import com.product.pcf.webservice.exception.ProductNotFoundException;
 import com.product.pcf.webservice.repository.ProductRepository;
 import com.product.pcf.webservice.service.IProductService;
@@ -47,18 +48,8 @@ public class ProductServiceTest {
     public ExpectedException thrown = ExpectedException.none();
 
 
-    private Product createProduct(Long id, String name, String description, Double cost){
-        Product newProduct = new Product();
-        newProduct.setId(id);
-        newProduct.setName(name);
-        newProduct.setDescription(description);
-        newProduct.setCost(cost);
-
-        return newProduct;
-
-    }
     @Test
-    public void createProduct_shouldReturnNewCart_whenCreateProductServiceIsInvoked() throws ProductNotFoundException{
+    public void createProduct_shouldReturnProductAlreadyExistsException_whenCreateProductCreatedAlreadyExists() throws ProductNotFoundException, ProductAlreadyExistsException {
 
         //Given
         Product newProduct = createProduct(1L,"Aspirador de pó","Aspirador",20.00);
@@ -66,6 +57,7 @@ public class ProductServiceTest {
         //When
         when(productRepository.findById(eq(1L))).thenReturn(Optional.of(newProduct));
         when(productRepository.save(any(Product.class))).thenReturn(newProduct);
+        thrown.expect(ProductAlreadyExistsException.class);
 
         Product product = productService.createProduct(newProduct);
 
@@ -121,26 +113,45 @@ public class ProductServiceTest {
 
         //When
         when(productRepository.findById(eq(expectedId))).thenReturn(Optional.of(newProduct));
-        //when(productRepository.findById(eq(expectedId))).thenReturn(Optional.of(newProduct));
+
+        Product product = productService.removeProduct(newProduct.getId());
 
 
         //Then
-        Product product = productService.removeProduct(newProduct.getId());
-        //verify(productRepository, times(3)).deleteById(eq(expectedId));
-
-
-        assertThat(product, hasProperty("name", is(nullValue())));
+        assertThat(product, hasProperty("name", is("Feijao Sitio Cercado")));
     }
 
     @Test
     public void removeProduct_shouldReturnListWithAllProducts_whenFindAllServiceIsInvoked()throws ProductNotFoundException {
 
+        //Given
+        List<Product> productsMock = createProductList();
+
+        //When
+        when(productRepository.findAll()).thenReturn(productsMock);
+
+        List<Product> productsFromService = productService.findAll();
+
+        //Then
+        assertThat(productsFromService, hasItem(Matchers.<Product>hasProperty("id", is(equalTo(2L)))));
+        assertThat(productsFromService, hasItem(Matchers.<Product>hasProperty("name", is(equalTo("Feijao Sitio Cercado")))));
+        assertThat(productsFromService, hasItem(Matchers.<Product>hasProperty("description", is(equalTo("Feijao Branco")))));
+        assertThat(productsFromService, hasItem(Matchers.<Product>hasProperty("cost", is(equalTo(5.00)))));
+
     }
 
+    private Product createProduct(Long id, String name, String description, Double cost){
+        Product newProduct = new Product();
+        newProduct.setId(id);
+        newProduct.setName(name);
+        newProduct.setDescription(description);
+        newProduct.setCost(cost);
 
+        return newProduct;
 
+    }
 
-        private List<Product> createProductList(){
+    private List<Product> createProductList(){
 
         Product caixaSabaoEmPo = createProduct(10L,"Sabao em pó","Sabao e pó",10.00);
         Product feijao = createProduct(2L,"Feijao Sitio Cercado","Feijao Branco",5.00);

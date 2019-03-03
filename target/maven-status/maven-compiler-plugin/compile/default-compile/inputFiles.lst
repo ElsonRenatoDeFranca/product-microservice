@@ -9,3 +9,4 @@ C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\vo\CartVO.java
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\demoapp\CartServiceApplication.java
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\service\impl\ProductServiceImpl.java
+C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\exception\ProductAlreadyExistsException.java
