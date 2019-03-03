@@ -1,0 +1,12 @@
+applications:
+- name: product-pcf-webservice-cloud-native
+  path: ./target/product-pcf-webservice-0.0.1-SNAPSHOT.jar
+  routes:
+    - route: product-pcf-webservice-cloud-native.cfapps.io
+  memory: 800MB
+  instances: 1
+  services:
+    - product-db
+  env:
+    SPRING_PROFILES_ACTIVE: pcf
+    products.service.url: https://product-pcf-webservice.cfapps.io
