@@ -36,7 +36,7 @@ public class DemoAppController {
         }
     }
 
-    @RequestMapping(method=RequestMethod.GET,value="/products}")
+    @RequestMapping(method=RequestMethod.GET,value="/products")
     public ResponseEntity<List<Product>> findAll(){
 
         try {

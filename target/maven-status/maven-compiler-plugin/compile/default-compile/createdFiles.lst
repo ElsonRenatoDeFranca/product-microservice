@@ -1,6 +1,7 @@
 com\product\pcf\webservice\exception\ProductNotFoundException.class
 com\product\pcf\webservice\controller\DemoAppController.class
 com\product\pcf\webservice\config\RestTemplateConfig$1.class
+com\product\pcf\webservice\demoapp\ProductApplication.class
 com\product\pcf\webservice\service\IProductService.class
 com\product\pcf\webservice\vo\CartVO.class
 com\product\pcf\webservice\repository\ProductRepository.class
@@ -8,6 +9,5 @@ com\product\pcf\webservice\vo\ProductVO.class
 com\product\pcf\webservice\config\RestTemplateConfig.class
 com\product\pcf\webservice\exception\ProductAlreadyExistsException.class
 com\product\pcf\webservice\entity\Product.class
-com\product\pcf\webservice\demoapp\CartServiceApplication.class
 com\product\pcf\webservice\service\impl\ProductServiceImpl.class
 com\product\pcf\webservice\constants\ProductConstants.class

@@ -55,7 +55,7 @@ public class ProductServiceTest {
         Product newProduct = createProduct(1L,"Aspirador de pó","Aspirador",20.00);
 
         //When
-        when(productRepository.findById(eq(1L))).thenReturn(Optional.of(newProduct));
+        when(productRepository.findOne(eq(1L))).thenReturn(newProduct);
         when(productRepository.save(any(Product.class))).thenReturn(newProduct);
         thrown.expect(ProductAlreadyExistsException.class);
 
@@ -74,7 +74,7 @@ public class ProductServiceTest {
         Product newProduct = createProduct(5L,"Tenis Olympicus","Tenis Branco",560.00);
 
         //When
-        when(productRepository.findById(eq(10L))).thenReturn(Optional.of(newProduct));
+        when(productRepository.findOne(eq(10L))).thenReturn(newProduct);
         thrown.expect(ProductNotFoundException.class);
 
         productService.findProductById(5L);
@@ -88,7 +88,7 @@ public class ProductServiceTest {
         Product newProduct = createProduct(null,"Tenis Olympicus","Tenis Branco",560.00);
 
         //When
-        when(productRepository.findById(eq(null))).thenReturn(Optional.of(newProduct));
+        //when(productRepository.findOne(null)).thenReturn(newProduct);
 
         Product productSearched = productService.createProduct(newProduct);
 
@@ -105,10 +105,10 @@ public class ProductServiceTest {
         Long expectedId = 2L;
 
         //When
-        when(productRepository.findById(eq(expectedId))).thenReturn(Optional.of(newProduct));
+        when(productRepository.findOne(eq(expectedId))).thenReturn(newProduct);
         Product productSearched = productService.findProductById(2L);
 
-        verify(productRepository, times(1)).findById(eq(expectedId));
+        verify(productRepository, times(1)).findOne(eq(expectedId));
 
         //Then
         assertThat(productSearched, is(notNullValue()));
@@ -126,7 +126,7 @@ public class ProductServiceTest {
         Long expectedId = 2L;
 
         //When
-        when(productRepository.findById(eq(expectedId))).thenReturn(Optional.of(newProduct));
+        when(productRepository.findOne(eq(expectedId))).thenReturn(newProduct);
 
         Product product = productService.removeProduct(newProduct.getId());
 

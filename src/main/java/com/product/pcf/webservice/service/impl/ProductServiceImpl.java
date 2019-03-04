@@ -10,7 +10,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductServiceImpl implements IProductService {
@@ -20,29 +22,27 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Product findProductById(Long productId) throws ProductNotFoundException{
-        return productRepository.findById(productId).orElseThrow(() -> new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE));
+        return productRepository.findOne(productId);
     }
 
     @Override
     @Cacheable("products")
     public List<Product> findAll()  throws ProductNotFoundException{
-        List<Product> products = productRepository.findAll();
-        if(products !=null){
-            return products;
-        }else{
-            throw new ProductNotFoundException(ProductConstants.PRODUCT_LIST_IS_EMPTY_ERROR_MESSAGE);
-        }
+        List<Product> products = new ArrayList<>();
+        productRepository.findAll().forEach(products::add);
+        return products;
     }
 
     @Override
     public Product createProduct(Product product) throws ProductAlreadyExistsException, ProductNotFoundException {
         Product existingProduct = this.findProductById(product.getId());
 
-        if(existingProduct.getId() == null){
+        if(existingProduct == null){
             return this.productRepository.save(product);
         }else{
             throw new ProductAlreadyExistsException(ProductConstants.PRODUCT_ALREADY_EXISTS_ERROR_MESSAGE);
         }
+
     }
 
     @Override
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements IProductService {
 
         Product existingProduct = this.findProductById(productId);
 
-        if(existingProduct.getId() != null){
+        if(existingProduct != null){
             this.productRepository.delete(existingProduct);
         }else{
             throw new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE);
