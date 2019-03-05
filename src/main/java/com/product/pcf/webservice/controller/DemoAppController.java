@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -51,9 +50,8 @@ public class DemoAppController {
 
     @RequestMapping(method=RequestMethod.POST, value="/products", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = null;
         try {
-            createdProduct = productService.createProduct(product);
+            Product createdProduct = productService.createProduct(product);
             return new ResponseEntity<> (createdProduct,HttpStatus.OK);
         } catch (ProductNotFoundException  | ProductAlreadyExistsException e) {
             return new ResponseEntity<> (HttpStatus.BAD_REQUEST);

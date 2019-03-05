@@ -4,7 +4,6 @@ C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\controller\DemoAppController.java
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\exception\ProductNotFoundException.java
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\service\IProductService.java
-C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\config\RestTemplateConfig.java
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\vo\ProductVO.java
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\vo\CartVO.java
 C:\Development\PetProjects\product-pcf-webservice\product-microservice\src\main\java\com\product\pcf\webservice\demoapp\ProductApplication.java

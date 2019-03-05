@@ -6,7 +6,7 @@ applications:
   memory: 800MB
   instances: 1
   services:
-    - product-db
+    - shopping-cart-db
   env:
     SPRING_PROFILES_ACTIVE: pcf
     products.service.url: https://product-pcf-webservice.cfapps.io
