@@ -54,21 +54,26 @@ public class ProductControllerTest {
 	@Test
 	public void findAll() throws Exception {
 
-		/*mockMvc.perform( MockMvcRequestBuilders
-				.get("/products")
-				.accept(MediaType.APPLICATION_JSON))
-				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.products").exists())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.products[*].productId").isNotEmpty());
-
-				*/
-
 		mockMvc.perform(MockMvcRequestBuilders.get("/products"))
 				.andExpect(status().isOk())
-				.andExpect(MockMvcResultMatchers.jsonPath("$.products[0].productId").isNotEmpty());
-		//.andExpect(jsonPath("$.[0].id",is(1)));
+
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].productId",is(1)))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].name", is("Arroz")))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].description", is("Arroz Parboilizado")))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].cost", is("3.50")))
+
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[1].productId",is(2)))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[1].name", is("Feijao")))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[1].description", is("Feijao Sitio Cercado")))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[1].cost", is("4.10")))
+
+
+
 
 		;
+						//.andExpect(jsonPath("$.[0].id",is(1)));
+
+
 
 	}
 	/*@Test

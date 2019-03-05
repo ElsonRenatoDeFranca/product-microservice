@@ -38,11 +38,13 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Product createProduct(Product product) throws ProductAlreadyExistsException, ProductNotFoundException {
-        Product existingProduct = this.findProductById(product.getProductId());
+        Product productSearched = this.findProductById(product.getProductId());
 
-        return Optional.of(existingProduct).map(p -> this.productRepository.save(product)).
-                orElseThrow(() -> new ProductAlreadyExistsException(ProductConstants.PRODUCT_ALREADY_EXISTS_ERROR_MESSAGE));
-
+        if(productSearched == null){
+            throw new ProductAlreadyExistsException(ProductConstants.PRODUCT_ALREADY_EXISTS_ERROR_MESSAGE);
+        }else{
+            return this.productRepository.save(productSearched);
+        }
     }
 
     @Override
