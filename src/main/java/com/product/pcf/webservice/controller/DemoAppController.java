@@ -39,8 +39,8 @@ public class DemoAppController {
     public ResponseEntity<List<Product>> findAll(){
 
         try {
-            List<Product> product = productService.findAll();
-            return new ResponseEntity<>(product, HttpStatus.OK);
+            List<Product> products = productService.findAll();
+            return new ResponseEntity<>(products, HttpStatus.OK);
 
         }catch(ProductNotFoundException cartEx){
             return new ResponseEntity<> (HttpStatus.BAD_REQUEST);

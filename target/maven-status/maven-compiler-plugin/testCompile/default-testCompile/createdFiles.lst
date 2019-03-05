@@ -1,1 +1,2 @@
-com\product\pcf\webservice\demoapp\ProductServiceTest.class
+com\product\pcf\webservice\service\ProductServiceTest.class
+com\product\pcf\webservice\controller\ProductControllerTest.class

@@ -6,6 +6,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.math.BigDecimal;
 
 @Entity(name = "PRODUCT")
 @Data
@@ -26,5 +27,5 @@ public class Product {
     private String description;
 
     @Column(name = "PRODUCT_COST", length = 30)
-    private Double cost;
+    private String cost;
 }
