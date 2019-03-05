@@ -22,10 +22,7 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Product findProductById(Long productId) throws ProductNotFoundException{
-
-        Product product = productRepository.findOne(productId);
-        return Optional.ofNullable(product).map(p -> p).
-                orElseThrow(() -> new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE));
+        return productRepository.findOne(productId);
     }
 
     @Override
@@ -40,10 +37,10 @@ public class ProductServiceImpl implements IProductService {
     public Product createProduct(Product product) throws ProductAlreadyExistsException, ProductNotFoundException {
         Product productSearched = this.findProductById(product.getProductId());
 
-        if(productSearched == null){
+        if(productSearched != null){
             throw new ProductAlreadyExistsException(ProductConstants.PRODUCT_ALREADY_EXISTS_ERROR_MESSAGE);
         }else{
-            return this.productRepository.save(productSearched);
+            return this.productRepository.save(product);
         }
     }
 
