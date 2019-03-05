@@ -22,11 +22,10 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Product findProductById(Long productId) throws ProductNotFoundException{
+
         Product product = productRepository.findOne(productId);
-        if(product == null){
-            throw new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE);
-        }
-        return product;
+        return Optional.ofNullable(product).map(p -> p).
+                orElseThrow(() -> new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE));
     }
 
     @Override
@@ -41,16 +40,13 @@ public class ProductServiceImpl implements IProductService {
     public Product createProduct(Product product) throws ProductAlreadyExistsException, ProductNotFoundException {
         Product existingProduct = this.findProductById(product.getProductId());
 
-        if(existingProduct == null){
-            return this.productRepository.save(product);
-        }else{
-            throw new ProductAlreadyExistsException(ProductConstants.PRODUCT_ALREADY_EXISTS_ERROR_MESSAGE);
-        }
+        return Optional.of(existingProduct).map(p -> this.productRepository.save(product)).
+                orElseThrow(() -> new ProductAlreadyExistsException(ProductConstants.PRODUCT_ALREADY_EXISTS_ERROR_MESSAGE));
 
     }
 
     @Override
-    public Product removeProduct(Long productId) throws ProductNotFoundException {
+    public void removeProduct(Long productId) throws ProductNotFoundException {
 
         Product existingProduct = this.findProductById(productId);
 
@@ -59,8 +55,6 @@ public class ProductServiceImpl implements IProductService {
         }else{
             throw new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE);
         }
-
-        return existingProduct;
 
     }
 

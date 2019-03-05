@@ -63,8 +63,8 @@ public class DemoAppController {
     public ResponseEntity<Product> removeProduct(@PathVariable(name="productId") Long productId) {
 
         try {
-            Product product = productService.removeProduct(productId);
-            return new ResponseEntity<> (product,HttpStatus.OK);
+            productService.removeProduct(productId);
+            return new ResponseEntity<> (HttpStatus.OK);
         } catch (ProductNotFoundException prodEx) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }

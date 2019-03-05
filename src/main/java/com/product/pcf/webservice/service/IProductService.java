@@ -35,6 +35,6 @@ public interface IProductService {
      * @return
      * @throws ProductNotFoundException
      */
-    Product removeProduct(Long productId) throws ProductNotFoundException;
+    void removeProduct(Long productId) throws ProductNotFoundException;
 
 }
