@@ -154,9 +154,9 @@ public class ProductServiceTest {
 
     }
 
-    private Product createProduct(Long id, String name, String description, Double cost){
+    private Product createProduct(Long produtId, String name, String description, Double cost){
         Product newProduct = new Product();
-        newProduct.setId(id);
+        newProduct.setProductId(produtId);
         newProduct.setName(name);
         newProduct.setDescription(description);
         newProduct.setCost(cost);

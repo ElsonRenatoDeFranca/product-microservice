@@ -22,7 +22,11 @@ public class ProductServiceImpl implements IProductService {
 
     @Override
     public Product findProductById(Long productId) throws ProductNotFoundException{
-        return productRepository.findOne(productId);
+        Product product = productRepository.findOne(productId);
+        if(product == null){
+            throw new ProductNotFoundException(ProductConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE);
+        }
+        return product;
     }
 
     @Override
