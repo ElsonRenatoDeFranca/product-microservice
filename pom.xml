@@ -2,19 +2,19 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.backend.webservice.product</groupId>
+    <groupId>br.com.bb</groupId>
     <artifactId>product-pcf-webservice</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.1</version>
     <name>product-pcf-webservice</name>
-    <description>Product webservice</description>
-
+    <description>product-pcf-webservice</description>
+    <packaging>war</packaging>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.10.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
     </parent>
-
 
 
     <properties>
@@ -22,6 +22,7 @@
     </properties>
 
     <dependencies>
+
         <!-- Compile -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -35,6 +36,7 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-rest</artifactId>
         </dependency>
+
         <!-- Runtime -->
         <dependency>
             <groupId>com.h2database</groupId>
@@ -47,6 +49,7 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.mockito/mockito-core -->
         <dependency>
             <groupId>org.mockito</groupId>
@@ -54,6 +57,9 @@
             <version>2.24.5</version>
             <scope>test</scope>
         </dependency>
+
+
+
         <!-- Cache -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
