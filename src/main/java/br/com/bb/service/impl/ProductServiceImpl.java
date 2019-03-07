@@ -52,4 +52,17 @@ public class ProductServiceImpl implements IProductService {
         productRepository.delete(searchedProduct);
     }
 
+    @Override
+    public Product updateProduct(Long id, Product product) throws ProductNotFoundException {
+
+        Product searchedProduct = this.findProductById(id);
+
+        if(searchedProduct == null){
+            throw new ProductNotFoundException(DemoAppConstants.PRODUCT_NOT_FOUND_ERROR_MESSAGE);
+        }
+        product.setId(id);
+        return productRepository.save(product);
+    }
+
+
 }

@@ -39,4 +39,14 @@ public interface IProductService {
      */
     void removeProduct(Long id) throws ProductNotFoundException;
 
+    /**
+     *
+     * @param id
+     * @param product
+     * @return
+     * @throws ProductNotFoundException
+     */
+    Product updateProduct(Long id, Product product) throws ProductNotFoundException;
+
+
 }

@@ -71,4 +71,18 @@ public class DemoAppController {
         }
     }
 
+
+    @RequestMapping(method=RequestMethod.PUT, value="/products/{id}")
+    public ResponseEntity<Product> update(@RequestBody Product product, @PathVariable Long id){
+
+        try{
+            Product productUpdated = productService.updateProduct(id, product);
+            return new ResponseEntity<>(productUpdated, HttpStatus.OK);
+
+        }catch(ProductNotFoundException cartEx){
+            return new ResponseEntity<> (HttpStatus.BAD_REQUEST);
+        }
+    }
+
+
 }
