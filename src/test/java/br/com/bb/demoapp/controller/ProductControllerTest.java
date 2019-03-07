@@ -1,9 +1,12 @@
 package br.com.bb.demoapp.controller;
 
 import br.com.bb.demoapp.ProductWebserviceApplication;
+import br.com.bb.entity.Product;
+import br.com.bb.repository.ProductRepository;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.Mock;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -28,6 +31,9 @@ public class ProductControllerTest {
     private WebApplicationContext webApplicationContext;
 
 	private MockMvc mockMvc;
+
+	@Mock
+	private ProductRepository productRepository;
 
 	@Before
     public void setup() throws Exception {
@@ -93,41 +99,10 @@ public class ProductControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[7].id",is(8)))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[7].name", is("Estante")))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[7].description", is("Estante Multiuso 5 Divisórias")))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.[7].cost", is(420.0)))
-
-
-
-		;
-						//.andExpect(jsonPath("$.[0].id",is(1)));
-
-
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[7].cost", is(420.0)));
 
 	}
-	/*@Test
-	public void listByCategoryEletrodomésticos() throws Exception {
-		mockMvc.perform(get("/product/listByCategory/2"))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$", hasSize(3)))
-		.andExpect(jsonPath("$[0].id", is(3)))
-		.andExpect(jsonPath("$[0].name", is("Aspirador de pó")))
-		.andExpect(jsonPath("$[1].id", is(4)))
-		.andExpect(jsonPath("$[1].name", is("Batedeira")))
-		.andExpect(jsonPath("$[2].id", is(5)))
-		.andExpect(jsonPath("$[2].name", is("Liquidificador")));
-	}
 
-	@Test
-	public void listByCategoryMóveis() throws Exception {
-		mockMvc.perform(get("/product/listByCategory/3"))
-		.andExpect(status().isOk())
-		.andExpect(jsonPath("$", hasSize(3)))
-		.andExpect(jsonPath("$[0].id", is(6)))
-		.andExpect(jsonPath("$[0].name", is("Sofá")))
-		.andExpect(jsonPath("$[1].id", is(7)))
-		.andExpect(jsonPath("$[1].name", is("Mesa")))
-		.andExpect(jsonPath("$[2].id", is(8)))
-		.andExpect(jsonPath("$[2].name", is("Estante")));
-	}
 
-	*/
+
 }
